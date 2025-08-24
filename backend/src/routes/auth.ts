@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import Joi from 'joi';
 import { asyncHandler, AppError } from '../middleware/errorHandler';
 import { authenticateToken } from '../middleware/auth';
@@ -55,7 +55,7 @@ const registerSchema = Joi.object({
 });
 
 // User registration
-router.post('/register', asyncHandler(async (req, res) => {
+router.post('/register', asyncHandler(async (req: Request, res: Response) => {
   // Validate request body
   const { error, value } = registerSchema.validate(req.body);
   if (error) {
@@ -73,7 +73,7 @@ router.post('/register', asyncHandler(async (req, res) => {
 }));
 
 // User login
-router.post('/login', asyncHandler(async (req, res) => {
+router.post('/login', asyncHandler(async (req: Request, res: Response) => {
   // Validate request body
   const { error, value } = loginSchema.validate(req.body);
   if (error) {
@@ -91,7 +91,7 @@ router.post('/login', asyncHandler(async (req, res) => {
 }));
 
 // User logout
-router.post('/logout', authenticateToken, asyncHandler(async (req, res) => {
+router.post('/logout', authenticateToken, asyncHandler(async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(' ')[1];
   
   if (token) {
@@ -106,7 +106,7 @@ router.post('/logout', authenticateToken, asyncHandler(async (req, res) => {
 }));
 
 // Get current user
-router.get('/me', authenticateToken, asyncHandler(async (req, res) => {
+router.get('/me', authenticateToken, asyncHandler(async (req: Request, res: Response) => {
   if (!req.user) {
     throw new AppError('User not found', 404, ErrorCodes.UNAUTHORIZED);
   }
@@ -121,7 +121,7 @@ router.get('/me', authenticateToken, asyncHandler(async (req, res) => {
 }));
 
 // Token validation endpoint
-router.post('/validate', asyncHandler(async (req, res) => {
+router.post('/validate', asyncHandler(async (req: Request, res: Response) => {
   const { token } = req.body;
   
   if (!token) {

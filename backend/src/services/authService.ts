@@ -40,7 +40,7 @@ export class AuthService {
       throw new AppError('JWT secret not configured', 500, ErrorCodes.SYSTEM_UNAVAILABLE);
     }
 
-    return jwt.sign(payload, jwtSecret, { expiresIn });
+    return jwt.sign(payload, jwtSecret, { expiresIn } as jwt.SignOptions);
   }
 
   static async login(credentials: LoginCredentials): Promise<AuthResult> {

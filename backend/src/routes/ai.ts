@@ -1,10 +1,10 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { asyncHandler } from '../middleware/errorHandler';
 
 const router = Router();
 
 // Multi-modal AI analysis
-router.post('/analyze-image', asyncHandler(async (req, res) => {
+router.post('/analyze-image', asyncHandler(async (req: Request, res: Response) => {
   // TODO: Implement image analysis
   res.json({
     success: true,
@@ -14,7 +14,7 @@ router.post('/analyze-image', asyncHandler(async (req, res) => {
 }));
 
 // Generate guiding questions
-router.post('/generate-questions', asyncHandler(async (req, res) => {
+router.post('/generate-questions', asyncHandler(async (req: Request, res: Response) => {
   // TODO: Implement question generation
   res.json({
     success: true,
@@ -24,7 +24,7 @@ router.post('/generate-questions', asyncHandler(async (req, res) => {
 }));
 
 // Evaluate student response
-router.post('/evaluate-response', asyncHandler(async (req, res) => {
+router.post('/evaluate-response', asyncHandler(async (req: Request, res: Response) => {
   // TODO: Implement response evaluation
   res.json({
     success: true,

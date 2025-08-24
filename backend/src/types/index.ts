@@ -8,6 +8,12 @@ export interface User {
   lastLoginAt: Date;
 }
 
+export interface UserWithPassword extends User {
+  password_hash: string;
+  is_active: boolean;
+  email_verified: boolean;
+}
+
 export interface Student extends User {
   studentId: string;
   grade: number;

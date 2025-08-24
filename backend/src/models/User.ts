@@ -1,9 +1,9 @@
 import { getPool } from '../database/connection';
 import bcrypt from 'bcryptjs';
-import { User, Student, Teacher } from '../types';
+import { User, UserWithPassword, Student, Teacher } from '../types';
 
 export class UserModel {
-  static async findByEmail(email: string): Promise<User | null> {
+  static async findByEmail(email: string): Promise<UserWithPassword | null> {
     const pool = getPool();
     const result = await pool.query(
       'SELECT * FROM users WHERE email = $1 AND is_active = true',

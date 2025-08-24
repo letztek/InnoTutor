@@ -24,7 +24,7 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   let statusCode = 500;
-  let code = ErrorCodes.SYSTEM_UNAVAILABLE;
+  let code = ErrorCodes.SYSTEM_UNAVAILABLE as string;
   let message = 'Internal server error';
 
   if (error instanceof AppError) {

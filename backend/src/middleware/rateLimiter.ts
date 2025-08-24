@@ -60,7 +60,7 @@ export class RateLimiter {
         // Add headers
         res.setHeader('X-RateLimit-Limit', this.maxRequests);
         res.setHeader('X-RateLimit-Remaining', Math.max(0, this.maxRequests - currentRequests - 1));
-        res.setHeader('X-RateLimit-Reset', new Date(now + this.windowMs));
+        res.setHeader('X-RateLimit-Reset', Math.floor((now + this.windowMs) / 1000));
 
         next();
       } catch (error) {

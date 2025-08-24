@@ -1,1 +1,42 @@
-import React from 'react';\nimport { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';\nimport { useNavigate } from 'react-router-dom';\nimport { useAuth } from '../contexts/AuthContext';\n\nconst Navbar: React.FC = () => {\n  const { user, logout } = useAuth();\n  const navigate = useNavigate();\n\n  const handleLogout = () => {\n    logout();\n    navigate('/');\n  };\n\n  return (\n    <AppBar position=\"static\">\n      <Toolbar>\n        <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n          問AI 2.0\n        </Typography>\n        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>\n          {user ? (\n            <>\n              <Typography variant=\"body2\">\n                歡迎, {user.name} ({user.role === 'teacher' ? '教師' : '學生'})\n              </Typography>\n              <Button color=\"inherit\" onClick={handleLogout}>\n                登出\n              </Button>\n            </>\n          ) : (\n            <Button color=\"inherit\" onClick={() => navigate('/login')}>\n              登入\n            </Button>\n          )}\n        </Box>\n      </Toolbar>\n    </AppBar>\n  );\n};\n\nexport default Navbar;
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+
+const Navbar: React.FC = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          問AI 2.0
+        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          {user ? (
+            <>
+              <Typography variant="body2">
+                歡迎, {user.name} ({user.role === 'teacher' ? '教師' : '學生'})
+              </Typography>
+              <Button color="inherit" onClick={handleLogout}>
+                登出
+              </Button>
+            </>
+          ) : (
+            <Button color="inherit" onClick={() => navigate('/login')}>
+              登入
+            </Button>
+          )}
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Navbar;
